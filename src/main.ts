@@ -542,13 +542,12 @@ export default class EmbeddedQueryControlPlugin extends Plugin {
                 this.el.empty();
                 let renderer = new SearchMarkdownRenderer(plugin.app, this.el, this);
                 renderer.onRenderComplete = () => {
-                  // TODO: See if we can improve measurement
                   // It exists because the markdown renderer is rendering async
                   // and the measurement processes are happening before the content has been rendered
                   _parent?.parent?.infinityScroll.measure(_parent, this);
                 };
                 component.addChild(renderer);
-                renderer.renderer.set(content);
+                renderer.render(content);
               } else {
                 return old.call(this, ...args);
               }
